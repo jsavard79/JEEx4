@@ -5,20 +5,20 @@ import java.util.List;
 import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.BodyTagSupport;
 
-public class student extends BodyTagSupport {
+public class student {
 	
-	private String id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	
-	public void setId(String id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -35,25 +35,47 @@ public class student extends BodyTagSupport {
 		this.lastName = lastName;
 	}
 	
-	public student(String id, String firstName, String lastName) {
+	public student() {
+		
+	}
+	
+	public student(int id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 	
-	@Override
-	public int doStartTag() {	
-		try {
-			String option = "<option value='" + getId() + "'>" + getFirstName() + " " + getLastName() + "</option>";
-			
-			JspWriter out = pageContext.getOut();
-			out.println(option);
-			
-		} catch (Exception ex ){
-			System.out.println(ex.getMessage());
-		}		
-		return EVAL_BODY_INCLUDE;
+	public List<student> getStudents() {
+		List<student> students = new ArrayList();
+		
+		students.add(new student(students.size() + 1, "John", "Doe"));
+		students.add(new student(students.size() + 1, "Jane", "Smith"));
+		students.add(new student(students.size() + 1, "Harry", "Potter"));
+		students.add(new student(students.size() + 1, "Ron", "Weasley"));
+		students.add(new student(students.size() + 1, "Hermione", "Granger"));
+		students.add(new student(students.size() + 1, "Draco", "Malfoy"));
+		
+		return students;
+		
+	}
+
+	public student getStudent(int id) {
+		List<student> students = getStudents();
+		
+		return students.stream()
+				.filter(student -> id == student.getId())
+				.findAny()
+				.orElse(null);
+	}
+
+	public boolean isStudentOnTeam(List<student> team, student student) {
+		
+		student result = team.stream()
+				.filter(s -> s == student)
+				.findAny()
+				.orElse(null);
+		
+		return result != null;
 	}
 	
-
 }

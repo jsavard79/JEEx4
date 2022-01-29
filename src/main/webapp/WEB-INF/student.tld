@@ -6,23 +6,20 @@
 	<tlib-version>1.2</tlib-version>
 	<jsp-version>2.0</jsp-version>
 	<tag>
-		<name>student</name>
-		<tag-class>ca.nbcc.student</tag-class>
+		<name>studentdropdown</name>
+		<tag-class>ca.nbcc.studentdropdown</tag-class>
 		<body-content>empty</body-content>>	
 		<attribute>
-			<name>id</name>
+			<name>name</name>
 			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>firstName</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
+			<name>className</name>
+			<required>false</required>
 		</attribute>
 		<attribute>
-			<name>lastName</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
+			<name>selectIndex</name>
+			<required>false</required>
 		</attribute>							
 	</tag>
 </taglib>
